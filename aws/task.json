@@ -5,13 +5,13 @@
    "containerDefinitions": [
        {
            "name": "app-container",
-           "image": "<your-image>:latest",
+           "image": "<account_id>.dkr.ecr.<region>.amazonaws.com/<repo>:latest",
            "cpu": 512,
-           "memoryReservation": 512,
+           "memoryReservation": 1024,
            "portMappings": [
                {
-                   "containerPort": 0,
-                   "hostPort": 3000,
+                   "containerPort": 4173,
+                   "hostPort": 4173,
                    "protocol": "tcp"
                }
            ],
@@ -25,16 +25,18 @@
            "logConfiguration": {
                "logDriver": "awslogs",
                "options": {
-                   "awslogs-group": "/ecs/web-app",
-                   "awslogs-region": "ap-southeast-1",
+                   "awslogs-group": "/ecs/<cluster_name>",
+                   "awslogs-region": "<region>",
                    "awslogs-stream-prefix": "ecs"
                }
            }
        }
    ],
-   "family": "web-app-task-def",
-   "taskRoleArn": "arn:aws:iam::490425202190:role/ECSTaskExecutionRole",
-   "executionRoleArn": "arn:aws:iam::490425202190:role/ECSTaskExecutionRole",
+   "cpu": "512",
+   "memory": "1024",
+   "family": "<task_family>",
+   "taskRoleArn": "arn:aws:iam::<account_id>:role/<role>",
+   "executionRoleArn": "arn:aws:iam::<account_id>:role/<role>",
    "networkMode": "awsvpc",
    "volumes": [],
    "placementConstraints": [],
